@@ -30,7 +30,7 @@ Advance: Click "Next" to proceed to the next scenario or level.
 To run this project locally:
 
 Clone the repository:
-git clone https://github.com/your-username/cyber-defender-game.git
+git clone https://github.com/MayankDey20/cyber-defender-game.git
 
 Navigate to the project directory:
 cd cyber-defender-game
