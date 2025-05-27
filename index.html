@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Defender: Threat Detection Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen">
+    <div id="welcome-screen" class="container mx-auto p-6 screen-transition">
+        <div class="text-center my-8">
+            <h1 class="text-4xl font-bold text-indigo-800">Cyber Defender</h1>
+            <p class="text-xl mt-2">Learn to identify and defend against cybersecurity threats</p>
+        </div>
+        
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-8">
+                <div class="flex justify-center mb-6">
+                    <div class="w-20 h-20 rounded-full bg-indigo-100 flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-4xl text-indigo-600"></i>
+                    </div>
+                </div>
+                
+                <h2 class="text-2xl font-semibold text-center mb-6">Welcome to Cyber Defender!</h2>
+                
+                <p class="mb-4">In this game, you'll learn how to identify common cybersecurity threats that you might encounter in your daily digital life. Your goal is to spot potential dangers in various scenarios like emails, websites, and messages.</p>
+                
+                <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                    <h3 class="font-semibold text-lg mb-2">How to Play:</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>You'll be presented with digital scenarios containing potential threats</li>
+                        <li>Identify the threats by clicking on suspicious elements or selecting options</li>
+                        <li>Earn points for correct identifications</li>
+                        <li>Learn about cyber threats through feedback after each scenario</li>
+                        <li>Complete all levels to become a certified Cyber Defender!</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-yellow-50 p-4 rounded-lg mb-6">
+                    <h3 class="font-semibold mb-2">You'll learn to identify:</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-fish text-yellow-700 mr-2"></i>
+                            <span>Phishing Attempts</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-bug text-yellow-700 mr-2"></i>
+                            <span>Malware Risks</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-lock text-yellow-700 mr-2"></i>
+                            <span>Weak Passwords</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-wifi text-yellow-700 mr-2"></i>
+                            <span>Network Vulnerabilities</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-user-secret text-yellow-700 mr-2"></i>
+                            <span>Social Engineering</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-triangle text-yellow-700 mr-2"></i>
+                            <span>Suspicious Downloads</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="start-game" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow hover:bg-indigo-700 transition-colors duration-300">
+                        <i class="fas fa-play mr-2"></i>Start Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="container mx-auto p-6 hidden screen-transition">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center">
+                <div class="mr-4">
+                    <span id="current-level" class="text-lg font-semibold text-indigo-800">Level 1</span>
+                </div>
+                <div class="w-64">
+                    <div class="progress-bar">
+                        <div id="progress-bar" class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <div class="mr-2 text-lg">Score:</div>
+                <div id="score" class="text-xl font-bold text-indigo-800">0</div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 id="scenario-title" class="text-xl font-semibold mb-4">Identify the Threat</h2>
+            <div id="scenario-description" class="mb-4 text-gray-600">
+                Examine the following scenario and identify any potential cybersecurity threats.
+            </div>
+            <div id="scenario-container" class="scenario-container p-4 mb-4">
+                </div>
+            
+            <div id="interaction-area" class="mb-4">
+                </div>
+            
+            <div id="feedback-area" class="p-4 rounded-lg hidden mb-4">
+                </div>
+            
+            <div class="flex justify-end">
+                <button id="next-button" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg shadow hover:bg-indigo-700 transition-colors duration-300 hidden">
+                    Next <i class="fas fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="results-screen" class="container mx-auto p-6 hidden screen-transition">
+        <div class="text-center my-8">
+            <h1 class="text-4xl font-bold text-indigo-800">Game Complete!</h1>
+            <p class="text-xl mt-2">You've completed the Cyber Defender training</p>
+        </div>
+        
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 bg-indigo-100 rounded-full mb-4">
+                    <i class="fas fa-trophy text-5xl text-indigo-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold">Your Final Score</h2>
+                <p id="final-score" class="text-4xl font-bold text-indigo-800 mt-2">0</p>
+                <p id="performance-message" class="mt-2 text-lg">Well done!</p>
+            </div>
+            
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4">What You've Learned</h3>
+                <div class="space-y-4">
+                    <div class="p-4 bg-indigo-50 rounded-lg">
+                        <h4 class="font-semibold flex items-center">
+                            <i class="fas fa-fish mr-2 text-indigo-600"></i>
+                            Phishing Detection
+                        </h4>
+                        <p class="mt-1 text-gray-700">
+                            Always verify sender emails and be suspicious of urgent requests for personal information or unexpected links.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-indigo-50 rounded-lg">
+                        <h4 class="font-semibold flex items-center">
+                            <i class="fas fa-lock mr-2 text-indigo-600"></i>
+                            Password Security
+                        </h4>
+                        <p class="mt-1 text-gray-700">
+                            Use strong, unique passwords for each account and enable two-factor authentication whenever possible.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-indigo-50 rounded-lg">
+                        <h4 class="font-semibold flex items-center">
+                            <i class="fas fa-wifi mr-2 text-indigo-600"></i>
+                            Network Safety
+                        </h4>
+                        <p class="mt-1 text-gray-700">
+                            Avoid unsecured public Wi-Fi networks and always use a VPN when accessing sensitive information in public.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-indigo-50 rounded-lg">
+                        <h4 class="font-semibold flex items-center">
+                            <i class="fas fa-shield-alt mr-2 text-indigo-600"></i>
+                            General Security
+                        </h4>
+                        <p class="mt-1 text-gray-700">
+                            Keep software updated, use antivirus protection, and verify website security before sharing sensitive information.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-yellow-50 p-6 rounded-lg mb-8">
+                <h3 class="text-xl font-semibold mb-3">Cyber Safety Tips</h3>
+                <ul class="space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                        <span>Always verify the sender's email address before clicking links or downloading attachments</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                        <span>Look for HTTPS and the padlock icon in your browser before entering sensitive information</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                        <span>Use password managers to create and store complex passwords</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                        <span>Enable two-factor authentication on all accounts that support it</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                        <span>Keep your operating system and applications updated with the latest security patches</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+                        <span>Be wary of offers that seem too good to be true—they usually are</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="text-center">
+                <button id="play-again" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow hover:bg-indigo-700 transition-colors duration-300">
+                    <i class="fas fa-redo mr-2"></i>Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
